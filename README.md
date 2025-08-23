@@ -21,14 +21,43 @@ create table sales(
   quantity INT,  
   price DECIMAL(10,2)  
   );
-  # 📥Data Insertion  
+  # 📥Data Insertion 
+  
   Insert into sales (sale_id,customer_id,product_id,sale_date,quantity,price)VALUES  
   (1,101,'P01','2023-01-05',2,500),  
   (2,102,'P02','2023-01-07',1,300),  
   (3,103,'P01','2023-01-10',3,500),  
   (4,101,'P03','2023-02-01',1,800),  
   (5,104,'P02','2023-02-05',2,300),  
-  (6,105,'P01','2023-02-07',4,500);  
+  (6,105,'P01','2023-02-07',4,500); 
+  # Dataset Preview:
+  |🏷️sale_id|👤 customer_id|📦product_id|📆 sale_date| 🔢quantity| 💰price|
+  |----------|--------------|-------------|-------------|-----------|---------|
+  |1         | 101          | P01         | 2023-01-05 | 2          | 500    |
+  |2         | 102           | P02        | 2023-01-07 | 1          | 300     |
+  |3         | 103          | P01        | 2023-01-10 | 3          | 500     |
+  |4        | 101          | P03       | 2023-02-01 | 1          | 800     |
+  |5         | 104           | P02        | 2023-02-05 | 2          | 300     |
+  |6         | 105           | P01        | 2023-02-07 | 4          | 500     |  
+  # QUERIES WITH OUTPUTS:  
+  # 1.Monthly Sales Trend (CTE)   
+  With monthly_sales As(  
+  select    
+        Date_Trunc('month',sale_date)
+  As month,  
+        sum(quantity * price) As  
+    total_sales  
+       from sales  
+       GROUP BY Date_Trunc('month',sale_date))  
+       select * from monthly_sales  ORDER BY month;
+       
+       
+        
+  
+
+  
+  
+  
   
   
   
